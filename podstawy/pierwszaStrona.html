@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>tytuł</title>
+    </head>
+    <body>
+       <h1>To jest tekst w HTML</h1>
+       <script>
+            document.write("Hello world!");
+            document.write("<br/>");
+            document.write("<i>Hello world!</i>");
+            document.write("<br/>")
+
+            var pierwszaZmienna;
+            document.write("Zawartość zmiennej " + pierwszaZmienna);
+            document.write("<br/>");
+
+            pierwszaZmienna = "true";
+            pierwszaZmienna = pierwszaZmienna + 1;
+            document.write("Zawartość zmiennej " + pierwszaZmienna);
+            document.write("<br/>");
+
+            pierwszaZmienna = 2;
+            pierwszaZmienna = pierwszaZmienna + 1;
+            document.write("Zawartość zmiennej " + (pierwszaZmienna + 1));
+            document.write("<br/>");
+
+            pierwszaZmienna = "Hello world!";
+            document.write("Zawartość zmiennej " + pierwszaZmienna);
+            document.write("<br/>");
+
+            pierwszaZmienna = true;
+            document.write("Zawartość zmiennej " + pierwszaZmienna);
+            document.write("<br/>");
+
+            //>, <, <=, >=, !=, ==, ===, !==
+            pierwszaZmienna = 2;
+            var drugaZmienna = "2";
+            var wynik = (pierwszaZmienna === drugaZmienna);
+            document.write("Wynik porównania " + wynik);
+            document.write("<br/>");
+       </script>
+    </body>
+</html>
