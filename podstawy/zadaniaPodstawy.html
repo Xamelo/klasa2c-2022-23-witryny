@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>tablica mnozenia</title>
+    </head>
+    <body>
+        <script>
+            /*var liczba = 0;
+            while (liczba <= 10)
+            {
+                document.write(liczba + "<br/>");
+                liczba += 1;
+            }
+            */
+
+            /*var mnozna = 1, mnoznik = 1, wynik;
+            while (mnozna < 10)
+            {
+                while (mnoznik < 10)
+                {
+                    wynik = mnozna * mnoznik;
+                    document.write(mnozna + " * " + mnoznik + " = " + wynik + "<br/>");
+                    mnoznik += 1;
+                }
+                mnoznik = 1;
+                mnozna += 1;
+            }*/
+
+            for (var mnozna = 1; mnozna < 10; mnozna++)
+            {
+                for (var mnoznik = 1; mnoznik < 10; mnoznik++)
+                {
+                    document.write(mnozna + " * " + mnoznik + " = " + (mnozna * mnoznik) + "<br/>")
+                }
+            }  
+        </script>
+    </body>
+</html>
