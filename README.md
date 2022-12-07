@@ -1,83 +1,69 @@
-# klasa2c-2022-23-witryny
-
 <!DOCTYPE html>
-<html lang = "pl">
-    <head>
-        <title>Przykładowy program</title>
-        <style>
-            body{
-                background-color: aqua;
-            }
-        </style>
-    </head>
-    <body>
-        <script>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Przykładowy program</title>
+    <style>
+        body{
+            background-color: aqua;
+            padding-top: 15px;
+            text-align: center;
+            font-size: 20px;
+        }
+    </style>
+</head>
+<body>  
+    <h1> Formularz </h1>
+    
+    <script>
+        function div()
+        {
+            let imie = document.getElementById("name");
 
+            let x = document.getElementById("tekst1");
+           
+            if(imie.value.length > 0)
+                x.innerHTML = "Witaj " + imie.value;
+            else
+                x.innerHTML = "Nie podałes imienia! ";
             
-            function zadanie2()
-            {
-                let tekst = new String("Filip Gos Czech");
-                document.write("Nazywam się Jan Kowalski" + "<br/>");
-                document.write("Nazywam się " + tekst);
-            }
-            zadanie2();
+            let age = document.getElementById("age");
+            let zmien = document.getElementById("tekst2");
 
-            document.write("<br/>");
+            if(age.value.length==0)
+                zmien.innerHTML = "Nie podałeś wieku!";
+            else if(age.value > 130)
+                zmien.innerHTML = "Nie istnieje taki wiek";
+            else if(age.value < 1)
+                zmien.innerHTML = "Błąd";
+            else if(age.value>=18)
+                zmien.innerHTML = "Jestes pelnoletni";
+            else if(age.value < 18)
+                zmien.innerHTML = "Jestes niepelnoletni";
+        }
 
-            function zadanie3(parametr)
-            {
-                if(parametr %2==0)
-                    document.write("Liczba parzysta");
-                else
-                    document.write("Liczba nieparzysta");
-            }
-            zadanie3(7);
+    </script>
 
-            tab=[5, 6];
-            function MaxLiczba(param)
-            {
-                let max=0;
-                for(let i=0; i < param.length; i++)
-                {
-                    if(max<tab[i]);
-                        max = tab[i];
-                }
-                document.write("Największa liczba to " + max);
-            }
-            document.write("<br/>"+"<br/>");
-            MaxLiczba(tab);
-            document.write("<br/>");
+<div>
+    <p> Podaj imię: </p>
+    <input type="text" id="name"/>
+    <p> Podaj wiek: </p>
+    <input type = "text" id ="age"/>
+    <br/>
+    <br/>
+    <input type = "button" value="Przycisk" onclick="div()"/> <br/>
+    <div>
+        <p id = "tekst1"> 
 
-            function zadanie5()
-            {
-                for (i = 0; i < 101; i++)
-                {
-                    document.write(i + ",");
-                }
-            }
-            zadanie5();
+        </p>
+    </div>
+    
+    <div>
+        <p id = "tekst2">
 
-            document.write("<br/>");
-
-
-            function ShowTime()
-            {
-                let data = new Date();
-                godzina = Fix(data.getHours());
-                minuta = Fix(data.getMinutes());
-                sekunda = Fix(data.getSeconds());
-
-                document.write(godzina + ":" + minuta + ":" + sekunda);
-            }
-            ShowTime();
-
-
-            function Fix(elementToFix)
-            {
-                if(elementToFix < 10)
-                    return "0" + elementToFix;
-                return elementToFix;
-            }
-        </script>
-    </body>
+        </p>
+    </div>
+</body>
 </html>
