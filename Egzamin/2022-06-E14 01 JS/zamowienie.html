@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lnag="pl-PL">
+    <head>
+        <meta charset="UTF-8">
+        <title>Fabryka cukierków</title>
+        <link rel="stylesheet" href="styl10.css">
+    </head>
+    <body>
+        <section class="bloki_gorne">
+            <div class="prawy_blok">
+                <a href="index.html"><img src="logotyp.png" alt="Nasze logo"></a>
+            </div>
+            <div class="lewy_blok">
+                <a href="zamowienie.html"><img src="cukierki1.jpg"></a>
+            </div>
+        </section>
+        <header>
+            <h1>Strefa zamówień</h1>
+        </header>
+        <main>
+            <div class="blok_prawy">
+                <h2>Nasza oferta</h2>
+                <table>
+                    <tr>
+                        <td>Kształty</td> <td rowspan="2">Możesz zamówić <br> dowolny kolor cukierka</td>
+                    </tr>
+                    <tr>
+                        <td><ol><li>cytryna</li><li>liść</li><li>banan</li></ol></td>
+                    </tr>
+                </table>
+            </div>
+            <div class="blok_lewy">
+                Numer kształtu: <br>
+                <input type="number" id="number"><br>
+                Skomponuj swój kolor, podaj RGB:<br>
+                R: <input type="number" id="R">
+                G: <input type="number" id="G">
+                B: <input type="number" id="B"><br>
+                <button type="button" onclick="zamowienie()">Zamówienie</button><br>
+                <p id="text1">Twoje zamówienie</p>
+                <button type="button" id="buttonId">Kolor</button>
+            </div>
+        </main>
+        <footer>
+            <b>Autor strony: Kamil Borek</b>
+        </footer>
+        <script>
+            function zamowienie()
+            {
+                let number = document.getElementById("number").value;
+                let text1 = document.getElementById("text1");
+
+                if (number == 1)
+                    text1.innerHTML = "Twoje zamówienie to cukierek cytryna";
+                else if (number == 2)
+                    text1.innerHTML = "Twoje zamówienie to cukierek liść";
+                else if (number == 3)
+                    text1.innerHTML = "Twoje zamówienie to cukierek banan";
+                else if (number < 1 || number > 3)
+                    text1.innerHTML = "Twoje zamówienie to cukierek inny";
+
+                kolorRGB();
+            }
+
+            function kolorRGB()
+            {
+                let R = document.getElementById("R").value;
+                let G = document.getElementById("G").value;
+                let B = document.getElementById("B").value;
+                document.getElementById("buttonId").style.backgroundColor = 'rgb(' + R + ',' + G + ',' + B + ')';
+            }
+        </script>
+    </body>
+</html>
