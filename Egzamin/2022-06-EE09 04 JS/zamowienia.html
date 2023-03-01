@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="pl-PL">
+    <head>
+        <meta charset="UTF-8">
+        <title>Zamówienia hurtowe</title>
+        <link rel="stylesheet" href="styl4.css">
+    </head>
+    <body>
+        <header>
+            <h1>Sieci komputerowe</h1>            
+        </header>
+        <main>
+            <div class="lewy">
+                <h2>Aktualizacja i zamówienia materiałów</h2>
+                <p>Do wewnętrznego użytku firmy</p>
+                <img src="obraz.png" alt="sieć komputerowa">
+            </div>
+
+            <div class="prawy">
+                <table>
+                    <tr>
+                        <th>Produkt</th> <th>Jednostka</th> <th>Dostępna ilość</th> <th>Aktualizacja</th> <th>Zamówienie</th>
+                    </tr>
+                    <tr>
+                        <td>Skrętka U/UTP drut</td> <td>metr</td> <td id="item1">20</td> <td><button onclick="update()">Aktualizuj</button></td> <td><button id="">Zamów</button></td>
+                    </tr>
+                    <tr>
+                        <td>Skrętka U/UTP linka</td> <td>metr</td> <td id="item2">2</td> <td><button onclick="update()">Aktualizuj</button></td> <td><button id="">Zamów</button></td>
+                    </tr>
+                    <tr>
+                        <td>Wtyki 8P8C</td> <td>sztuki</td> <td id="item3">10</td> <td><button onclick="update()">Aktualizuj</button></td> <td><button id="">Zamów</button></td>
+                    </tr>
+                    <tr>
+                        <td>Moduły Keystone</td> <td>sztuki</td> <td id="item4">30</td> <td><button onclick="update()">Aktualizuj</button></td> <td><button id="">Zamów</button></td>
+                    </tr>
+                </table>
+            </div>
+        </main>
+        <footer>
+            <a href="http://sieci.pl/">Nasza strona internetowa</a>
+            <p>Stronę przygotował: Kamil Borek</p>
+        </footer>
+        <script>
+            let item1 = document.getElementById("item1").innerHTML, item1background = document.getElementById("item1");
+            let item2 = document.getElementById("item2").innerHTML, item2background = document.getElementById("item2");
+            let item3 = document.getElementById("item3").innerHTML, item3background = document.getElementById("item3");
+            let item4 = document.getElementById("item4").innerHTML, item4background = document.getElementById("item4");
+            let tab = [item1, item2, item3, item4]
+            let backgroundtab = [item1background, item2background, item3background, item4background]
+            function lack()
+            {
+                for (let i = 0; i <= 3; i++)
+                {
+                    if (tab[i] == 0)
+                    backgroundtab[i].style.backgroundColor = "red";
+                else if (tab[i] >= 1 && tab[i] <= 5)
+                    backgroundtab[i].style.backgroundColor = "yellow";
+                }
+            }
+
+            function update()
+            {
+                let newValue = prompt("Podaj nową wartość: ");
+                item1 = newValue;
+                lack();
+            }
+        </script>
+    </body>
+</html>
