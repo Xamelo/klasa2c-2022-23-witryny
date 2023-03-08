@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="pl-PL">
+    <head>
+        <meta charset="UTF-8">
+        <title>Zamówienia hurtowe</title>
+        <link rel="stylesheet" href="styl4.css">
+    </head>
+    <body>
+        <header>
+            <h1>Sieci komputerowe</h1>            
+        </header>
+        <main>
+            <div class="lewy">
+                <h2>Aktualizacja i zamówienia materiałów</h2>
+                <p>Do wewnętrznego użytku firmy</p>
+                <img src="obraz.png" alt="sieć komputerowa">
+            </div>
+
+            <div class="prawy">
+                <table>
+                    <tr>
+                        <th>Produkt</th> <th>Jednostka</th> <th>Dostępna ilość</th> <th>Aktualizacja</th> <th>Zamówienie</th>
+                    </tr>
+                    <tr>
+                        <td id="name1">Skrętka U/UTP drut</td> <td>metr</td> <td id="item1">20</td> <td><button onclick="update('item1')">Aktualizuj</button></td> <td><button onclick="order('name1')">Zamów</button></td>
+                    </tr>
+                    <tr>
+                        <td id="name2">Skrętka U/UTP linka</td> <td>metr</td> <td id="item2">2</td> <td><button onclick="update('item2')">Aktualizuj</button></td> <td><button onclick="order('name2')">Zamów</button></td>
+                    </tr>
+                    <tr>
+                        <td id="name3">Wtyki 8P8C</td> <td>sztuki</td> <td id="item3">10</td> <td><button onclick="update('item3')">Aktualizuj</button></td> <td><button onclick="order('name3')">Zamów</button></td>
+                    </tr>
+                    <tr>
+                        <td id="name4">Moduły Keystone</td> <td>sztuki</td> <td id="item4">30</td> <td><button onclick="update('item4')">Aktualizuj</button></td> <td><button onclick="order('name4')">Zamów</button></td>
+                    </tr>
+                </table>
+            </div>
+        </main>
+        <footer>
+            <a href="http://sieci.pl/">Nasza strona internetowa</a>
+            <p>Stronę przygotował: Kamil Borek</p>
+        </footer>
+        <script>
+            let order_id = 0;
+            lack();
+
+            function lack()
+            {
+                let item1 = document.getElementById("item1").innerHTML, item1background = document.getElementById("item1");
+                let item2 = document.getElementById("item2").innerHTML, item2background = document.getElementById("item2");
+                let item3 = document.getElementById("item3").innerHTML, item3background = document.getElementById("item3");
+                let item4 = document.getElementById("item4").innerHTML, item4background = document.getElementById("item4");
+                let itemTab = [item1, item2, item3, item4];
+                let backgroundTab = [item1background, item2background, item3background, item4background];
+                
+                for (let i = 0; i <= 3; i++)
+                {
+                    if (itemTab[i] == 0)
+                        backgroundTab[i].style.backgroundColor = "red";
+                    else if (itemTab[i] >= 1 && itemTab[i] <= 5)
+                        backgroundTab[i].style.backgroundColor = "yellow";
+                }
+            }
+
+            function update(itemId)
+            {
+                let newValue = prompt("Podaj nową ilość: ");
+                document.getElementById(itemId).innerHTML = newValue;
+                lack();
+            }
+
+            function order(lineId)
+            {
+                order_id = order_id + 1;
+                let name = document.getElementById(lineId).innerHTML;
+
+                alert("Zamówienie nr: " + order_id + " Produkt: " + name);
+            }
+        </script>
+    </body>
+</html>
