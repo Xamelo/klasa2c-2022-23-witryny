@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="pl-PL">
+    <head>
+        <meta charset="UTF-8">
+        <title>Kochamy kawę</title>
+        <link rel="stylesheet" href="styl.css">
+    </head>
+    <body>
+        <section class="start">
+            <div class="menu">
+                <a href="index.html">Strona główna</a>
+                <a href="zamowienia.html">Zamówienia</a>
+                <a href="blog.html">Blog</a>
+                <a href="http://gatunki-kawy.pl/">Gatunki kawy</a>
+            </div>
+
+            <div class="logo">
+                <img src="logo.png" alt="Kawa">
+            </div>
+        </section>
+        <header>
+            <h1>Sklep z kawą</h1>
+        </header>
+        <main>
+            <div class="lewy">
+                Podaj numer kawy:
+                <input type="number" id="coffeNumber"><br>
+                Podaj wagę w dekagramach:
+                <input type="number" id="coffeWeight"><br>
+                <button onclick="order()">Zamów</button><br>
+                <span id="result">
+
+                </span>
+            </div>
+
+            <div class="prawy">
+                <h3>Oferta</h3>
+                <ul>
+                    <li>Arabica</li>
+                    <li>Robusta</li>
+                    <li>bezkofeinowa</li>
+                    <li>zielona</li>
+                </ul>
+            </div>
+        </main>
+        <footer>
+            Stronę przygotował: <b>Kamil Borek</b>
+        </footer>
+    </body>
+    <script>
+        function order()
+        {
+            let number = document.getElementById("coffeNumber").value;
+            let weight = document.getElementById("coffeWeight").value;
+            let cost;
+            let result = document.getElementById("result");
+
+            if (number == 1)
+                cost = weight * 5;
+            else if (number == 2)
+                cost = weight * 7;
+            else if (number == 4)
+                cost = weight * 6;
+            else if (number != 1 || number != 2 || number != 4)
+                cost = 0;
+
+            result.innerHTML = "Koszt zamówienia wynosi: " + cost + " zł";
+        }
+    </script>
+</html>
