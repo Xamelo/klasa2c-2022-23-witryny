@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="pl-PL">
+    <head>
+        <meta charset="UTF-8">
+        <title>Style w JavaScript</title>
+        <link rel="stylesheet" href="styl6.css">
+    </head>
+    <body>
+        <main>
+            <div class="lewy">
+                <h1>Konfigurator stylu</h1>
+                <p>Podaj kolor tła</p>
+                <button id="Indigo" onclick="indigoColor()">Indigo</button>
+                <button id="SteelBlue" onclick="steelBlueColor()">SteelBlue</button>
+                <button id="Olive" onclick="oliveColor()">Olive</button>
+                <p>Podaj kolor czcionki</p>
+                <select>
+                    <option onclick="whiteFont()">White</option>
+                    <option onclick="tanFont()">Tan</option>
+                    <option onclick="bisqueFont()">Bisque</option>
+                    <option onclick="plumFont()">Plum</option>
+                </select>
+                <p>Podaj rozmiar czcionki w procentach, np. 200%</p>
+                <input type="text" value="100%">
+                <p>Czy rysunek ma mieć ramkę?</p>
+                <input type="checkbox" checked> Rysuj ramkę
+                <p>Jaki jest typ punktora listy?</p>
+                <input type="radio" checked> dysk<br>
+                <input type="radio"> kwadrat<br>
+                <input type="radio"> okrąg
+            </div>
+
+            <div class="prawy" id="prawy">
+                <section class="elementyPrawe">
+                    <img src="gibraltar.jpg" alt="półwysep Gibraltar">
+                    <ul>
+                        <li>element 1</li>
+                        <li>element 2</li>
+                        <li>element 3</li>
+                    </ul>
+                </section>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. </p>
+            </div>
+        </main>
+        <footer>
+            Autor: Kamil Borek
+        </footer>
+    </body>
+    <script>
+        function indigoColor()
+        {
+            document.getElementById("prawy").style.backgroundColor = "indigo";
+        }
+
+        function steelBlueColor()
+        {
+            document.getElementById("prawy").style.backgroundColor = "steelblue";
+        }
+
+        function oliveColor()
+        {
+            document.getElementById("prawy").style.backgroundColor = "olive";
+        }
+
+        function whiteFont()
+        {
+            document.getElementById("prawy").style.color = "white";
+        }
+
+        function tanFont()
+        {
+            document.getElementById("prawy").style.color = "tan";
+        }
+    </script>
+</html>
