@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="pl-PL">
+    <head>
+        <meta charset="UTF-8">
+        <title>kolko i krzyzyk</title>
+        <link rel="stylesheet" href="style.css">
+        <script src="script.js"></script>
+    </head>
+    <body>
+        <header>
+            <h1>Gra w kółko i krzyżyk</h1>
+        </header>
+        <main>
+            <section class="informacje">
+                <p><button>reset</button></p>
+                <p>Podaj rozmiar planszy</p>
+                <input type="number" placeholder="3">
+            </section>
+            <section class="plansza">
+                <table>
+                    <tr>
+                        <td><button onclick="setMark(0)" id="one"></button></td> <td><button onclick="setMark(1)" id="two"></button></td> <td><button onclick="setMark(2)" id="three"></button></td>
+                    </tr>
+                    <tr>
+                        <td><button onclick="setMark(3)" id="four"></button></td> <td><button onclick="setMark(4)" id="five"></button></td> <td><button onclick="setMark(5)" id="six"></button></td>
+                    </tr>
+                    <tr>
+                        <td><button onclick="setMark(6)" id="seven"></button></td> <td><button onclick="setMark(7)" id="eight"></button></td> <td><button onclick="setMark(8)" id="nine"></button></td>
+                    </tr>
+                </table>
+            </section>
+        </main>
+        <footer>
+            <h3>Autor: Kamil Borek</h3>
+        </footer>
+    </body>
+</html>
