@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="pl-PL">
+    <head>
+        <meta charset="UTF-8">
+        <title>kolko i krzyzyk</title>
+        <link rel="stylesheet" href="style.css">
+    </head>
+    <body>
+        <header>
+            <h1>Gra w kółko i krzyżyk</h1>
+        </header>
+        <main>
+            <section>
+                <div class="menu">
+                    <p>Wybierz kogo ruch</p>
+                    <button id="X" class="playerButton" onclick="zmienPierwszegoGracza(0)">X</button>
+                    <button id="O" class="playerButton" onclick="zmienPierwszegoGracza(1)">O</button><br/>
+                </div>
+                <div class="wynik">
+                    <p>Wynik:</p>
+                    <span id="calyWynikX"><b>X:</b> 0</span>
+                    <span id="calyWynikO"><b>O:</b> 0</span>
+                </div>
+            </section>
+            <section class="plansza">
+                <table>
+                    <tr>
+                        <td onclick="ruch(0, 0)"></td>
+                        <td onclick="ruch(0, 1)"></td>
+                        <td onclick="ruch(0, 2)"></td>
+                      </tr>
+                      <tr>
+                        <td onclick="ruch(1, 0)"></td>
+                        <td onclick="ruch(1, 1)"></td>
+                        <td onclick="ruch(1, 2)"></td>
+                      </tr>
+                      <tr>
+                        <td onclick="ruch(2, 0)"></td>
+                        <td onclick="ruch(2, 1)"></td>
+                        <td onclick="ruch(2, 2)"></td>
+                      </tr>
+                </table>
+            </section>
+            <section>
+                <div class="reset">
+                    <p>
+                        <button class="reset-button" onclick="zresetujPlansze()">reset planszy</button>
+                        <button class="reset-button" onclick="zresetujWynik()">reset wyniku</button>
+                    </p>
+                </div>
+            </section>
+        </main>
+        <footer>
+            <h3>Autor: Kamil Borek</h3>
+        </footer>
+    </body>
+    <script>
+        let wynikX = 0;
+        let wynikO = 0;
+        let plansza =
+        [
+            ['', '', ''],
+            ['', '', ''],
+            ['', '', '']
+        ]
+        let aktualnyGracz = 0;
+        let znakGracza = ["X", "O"]
+
+        function ruch(wiersz, kolumna)
+        {
+            if (plansza[wiersz][kolumna] == '')
+            {
+                plansza[wiersz][kolumna] = znakGracza[aktualnyGracz];
+                zaktualizujWygladPlanszy();
+
+                if (sprawdzWygrana(znakGracza[aktualnyGracz]))
+                {
+                    alert('Gracz ' + (znakGracza[aktualnyGracz]) + ' wygrał!');
+                    if (aktualnyGracz == 0)
+                    {
+                        wynikX += 1;
+                        document.getElementById("calyWynikX").innerHTML = "X: " + wynikX;
+                    }
+                    else
+                    {
+                        wynikO += 1;
+                        document.getElementById("calyWynikO").innerHTML = "O: " + wynikO;
+                    }
+                } 
+                else if (sprawdzRemis())
+                {
+                    alert('Remis!');
+                }
+                else
+                {
+                    aktualnyGracz = (aktualnyGracz + 1) % znakGracza.length;
+                }
+            }
+        }
+
+        function sprawdzWygrana(gracz)
+        {
+        //wiersze
+            for (let i = 0; i < 3; i++)
+            {
+                if (plansza[i][0] === gracz && plansza[i][1] === gracz && plansza[i][2] === gracz) 
+                {
+                    return true;
+                }
+            }
+
+            //kolumny
+            for (let j = 0; j < 3; j++)
+            {
+                if (plansza[0][j] === gracz && plansza[1][j] === gracz && plansza[2][j] === gracz)
+                {
+                    return true;
+                }
+            }
+
+            //przekątne
+            if ((plansza[0][0] === gracz && plansza[1][1] === gracz && plansza[2][2] === gracz) ||
+            (plansza[0][2] === gracz && plansza[1][1] === gracz && plansza[2][0] === gracz))
+            {
+                return true;
+            }
+            return false;
+        }
+
+        function sprawdzRemis()
+        {
+            for (let i = 0; i < 3; i++)
+            {
+                for (let j = 0; j < 3; j++)
+                {
+                    if (plansza[i][j] === '')
+                    {
+                        return false;
+                    }
+                }
+            }
+            return true;
+        }
+
+        function zaktualizujWygladPlanszy()
+        {
+            const komorki = document.getElementsByTagName('td');
+            let indeks = 0;
+            for (let i = 0; i < 3; i++)
+            {
+                for (let j = 0; j < 3; j++)
+                {
+                    komorki[indeks].innerText = plansza[i][j];
+                    indeks++;
+                }
+            }
+        }
+
+        zaktualizujWygladPlanszy();
+
+        function zresetujPlansze()
+        {
+            plansza =
+            [
+                ['', '', ''],
+                ['', '', ''],
+                ['', '', '']
+            ]
+            aktualnyGracz = 0;
+            zaktualizujWygladPlanszy();
+        }
+
+        function zmienPierwszegoGracza(gracz)
+        {
+            if (gracz == 0)
+            {
+                aktualnyGracz = 0;
+            }
+            else
+            {
+                aktualnyGracz = 1;
+            }
+        }
+
+        function zresetujWynik()
+        {
+            document.getElementById("calyWynikX").innerHTML = "X: 0";
+            document.getElementById("calyWynikO").innerHTML = "O: 0";
+        }
+    </script>
+</html>
