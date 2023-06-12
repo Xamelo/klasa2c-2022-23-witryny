@@ -65,10 +65,11 @@
         ]
         let aktualnyGracz = 0;
         let znakGracza = ["X", "O"]
+        let aktywnoscPlanszy = true;
 
         function ruch(wiersz, kolumna)
         {
-            if (plansza[wiersz][kolumna] == '')
+            if (plansza[wiersz][kolumna] == '' && aktywnoscPlanszy == true)
             {
                 plansza[wiersz][kolumna] = znakGracza[aktualnyGracz];
                 zaktualizujWygladPlanszy();
@@ -76,34 +77,35 @@
                 {
                     if (sprawdzWygrana(znakGracza[aktualnyGracz]))
                     {
-                    alert('Gracz ' + (znakGracza[aktualnyGracz]) + ' wygrał!');
-                    if (aktualnyGracz == 0)
-                    {
-                        wynikX += 1;
-                        document.getElementById("calyWynikX").innerHTML = "X: " + wynikX;
-                    }
-                    else
-                    {
-                        wynikO += 1;
-                        document.getElementById("calyWynikO").innerHTML = "O: " + wynikO;
-                    }
+                        alert('Gracz ' + (znakGracza[aktualnyGracz]) + ' wygrał! zresetuj plansze by grać dalej');
+                        if (aktualnyGracz == 0)
+                        {
+                            wynikX += 1;
+                            document.getElementById("calyWynikX").innerHTML = "X: " + wynikX;
+                        }
+                        else
+                        {
+                            wynikO += 1;
+                            document.getElementById("calyWynikO").innerHTML = "O: " + wynikO;
+                        }
+                        aktywnoscPlanszy = false;
                     } 
                     else if (sprawdzRemis())
                     {
                         alert('Remis!');
+                        aktywnoscPlanszy = false;
                     }
                     else
                     {
                         aktualnyGracz = (aktualnyGracz + 1) % znakGracza.length;
                     }
                 }, 10);
-                
             }
         }
 
         function sprawdzWygrana(gracz)
         {
-        //wiersze
+            //wiersze
             for (let i = 0; i < 3; i++)
             {
                 if (plansza[i][0] === gracz && plansza[i][1] === gracz && plansza[i][2] === gracz) 
@@ -145,6 +147,7 @@
             return true;
         }
 
+        //wypelnianie planszy
         function zaktualizujWygladPlanszy()
         {
             const komorki = document.getElementsByTagName('td');
@@ -169,6 +172,7 @@
                 ['', '', ''],
                 ['', '', '']
             ]
+            aktywnoscPlanszy = true;
             aktualnyGracz = 0;
             zaktualizujWygladPlanszy();
         }
