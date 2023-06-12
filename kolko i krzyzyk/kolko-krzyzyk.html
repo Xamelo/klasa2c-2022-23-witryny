@@ -18,8 +18,8 @@
                 </div>
                 <div class="wynik">
                     <p>Wynik:</p>
-                    <span id="calyWynikX"><b>X:</b>0</span>
-                    <span id="calyWynikO"><b>O:</b>0</span>
+                    <span id="calyWynikX">X: 0</span>
+                    <span id="calyWynikO">O: 0</span>
                 </div>
             </section>
             <section class="plansza">
@@ -72,9 +72,10 @@
             {
                 plansza[wiersz][kolumna] = znakGracza[aktualnyGracz];
                 zaktualizujWygladPlanszy();
-
-                if (sprawdzWygrana(znakGracza[aktualnyGracz]))
+                setTimeout (function()
                 {
+                    if (sprawdzWygrana(znakGracza[aktualnyGracz]))
+                    {
                     alert('Gracz ' + (znakGracza[aktualnyGracz]) + ' wygrał!');
                     if (aktualnyGracz == 0)
                     {
@@ -86,15 +87,17 @@
                         wynikO += 1;
                         document.getElementById("calyWynikO").innerHTML = "O: " + wynikO;
                     }
-                } 
-                else if (sprawdzRemis())
-                {
-                    alert('Remis!');
-                }
-                else
-                {
-                    aktualnyGracz = (aktualnyGracz + 1) % znakGracza.length;
-                }
+                    } 
+                    else if (sprawdzRemis())
+                    {
+                        alert('Remis!');
+                    }
+                    else
+                    {
+                        aktualnyGracz = (aktualnyGracz + 1) % znakGracza.length;
+                    }
+                }, 10);
+                
             }
         }
 
