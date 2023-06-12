@@ -18,8 +18,8 @@
                 </div>
                 <div class="wynik">
                     <p>Wynik:</p>
-                    <span id="calyWynikX"><b>X:</b> 0</span>
-                    <span id="calyWynikO"><b>O:</b> 0</span>
+                    <span id="calyWynikX"><b>X:</b>0</span>
+                    <span id="calyWynikO"><b>O:</b>0</span>
                 </div>
             </section>
             <section class="plansza">
@@ -184,8 +184,10 @@
 
         function zresetujWynik()
         {
-            document.getElementById("calyWynikX").innerHTML = "X: 0";
-            document.getElementById("calyWynikO").innerHTML = "O: 0";
+            wynikO = 0;
+            wynikX = 0;
+            document.getElementById("calyWynikX").innerHTML = "X: " + wynikX;
+            document.getElementById("calyWynikO").innerHTML = "O: " + wynikO;
         }
     </script>
 </html>
