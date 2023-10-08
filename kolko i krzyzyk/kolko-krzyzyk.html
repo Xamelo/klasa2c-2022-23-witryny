@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="pl-PL">
     <head>
@@ -10,42 +11,42 @@
             <h1>Gra w kółko i krzyżyk</h1>
         </header>
         <main>
-            <section>
+            <section class="menuPanel">
                 <div class="menu">
                     <p>Wybierz kogo ruch</p>
-                    <button id="X" class="playerButton" onclick="zmienPierwszegoGracza(0)">X</button>
-                    <button id="O" class="playerButton" onclick="zmienPierwszegoGracza(1)">O</button><br/>
+                    <button id="X" class="playerButton" onclick="changePlayerSign(0)">X</button>
+                    <button id="O" class="playerButton" onclick="changePlayerSign(1)">O</button><br/>
                 </div>
-                <div class="wynik">
+                <div class="score">
                     <p>Wynik:</p>
-                    <span id="calyWynikX">X: 0</span>
-                    <span id="calyWynikO">O: 0</span>
+                    <span id="xScoreMark">X: 0</span>
+                    <span id="oScoreMark">O: 0</span>
                 </div>
             </section>
-            <section class="plansza">
+            <section class="board">
                 <table>
                     <tr>
-                        <td onclick="ruch(0, 0)"></td>
-                        <td onclick="ruch(0, 1)"></td>
-                        <td onclick="ruch(0, 2)"></td>
+                        <td onclick="move(0, 0)"></td>
+                        <td onclick="move(0, 1)"></td>
+                        <td onclick="move(0, 2)"></td>
                       </tr>
                       <tr>
-                        <td onclick="ruch(1, 0)"></td>
-                        <td onclick="ruch(1, 1)"></td>
-                        <td onclick="ruch(1, 2)"></td>
+                        <td onclick="move(1, 0)"></td>
+                        <td onclick="move(1, 1)"></td>
+                        <td onclick="move(1, 2)"></td>
                       </tr>
                       <tr>
-                        <td onclick="ruch(2, 0)"></td>
-                        <td onclick="ruch(2, 1)"></td>
-                        <td onclick="ruch(2, 2)"></td>
+                        <td onclick="move(2, 0)"></td>
+                        <td onclick="move(2, 1)"></td>
+                        <td onclick="move(2, 2)"></td>
                       </tr>
                 </table>
             </section>
-            <section>
+            <section class="resetPanel">
                 <div class="reset">
                     <p>
-                        <button class="reset-button" onclick="zresetujPlansze()">reset planszy</button>
-                        <button class="reset-button" onclick="zresetujWynik()">reset wyniku</button>
+                        <button class="reset-button" onclick="resetBoard()">reset planszy</button>
+                        <button class="reset-button" onclick="resetScore()">reset wyniku</button>
                     </p>
                 </div>
             </section>
@@ -55,90 +56,125 @@
         </footer>
     </body>
     <script>
-        let wynikX = 0;
-        let wynikO = 0;
-        let plansza =
+        //#region variables
+        let scoreX = 0;
+        let scoreO = 0;
+        let board =
         [
             ['', '', ''],
             ['', '', ''],
             ['', '', '']
         ]
-        let aktualnyGracz = 0;
-        let znakGracza = ["X", "O"]
-        let aktywnoscPlanszy = true;
+        let currentPlayer = 0;
+        let playerSign = ["X", "O"]
+        let boardActivity = true;
+        //#endregion
 
-        function ruch(wiersz, kolumna)
+        function move(row, column)
         {
-            if (plansza[wiersz][kolumna] == '' && aktywnoscPlanszy == true)
+            if (checkMoveAvailability(row, column))
             {
-                plansza[wiersz][kolumna] = znakGracza[aktualnyGracz];
-                zaktualizujWygladPlanszy();
+                board[row][column] = playerSign[currentPlayer];
+                updateBoardStatus();
                 setTimeout (function()
                 {
-                    if (sprawdzWygrana(znakGracza[aktualnyGracz]))
-                    {
-                        alert('Gracz ' + (znakGracza[aktualnyGracz]) + ' wygrał! zresetuj plansze by grać dalej');
-                        if (aktualnyGracz == 0)
-                        {
-                            wynikX += 1;
-                            document.getElementById("calyWynikX").innerHTML = "X: " + wynikX;
-                        }
-                        else
-                        {
-                            wynikO += 1;
-                            document.getElementById("calyWynikO").innerHTML = "O: " + wynikO;
-                        }
-                        aktywnoscPlanszy = false;
-                    } 
-                    else if (sprawdzRemis())
-                    {
-                        alert('Remis!');
-                        aktywnoscPlanszy = false;
-                    }
-                    else
-                    {
-                        aktualnyGracz = (aktualnyGracz + 1) % znakGracza.length;
-                    }
+                    checkResultOfMove();
                 }, 10);
             }
         }
 
-        function sprawdzWygrana(gracz)
+        function checkResultOfMove()
         {
-            //wiersze
-            for (let i = 0; i < 3; i++)
+            if (checkWin(playerSign[currentPlayer]))
             {
-                if (plansza[i][0] === gracz && plansza[i][1] === gracz && plansza[i][2] === gracz) 
-                {
-                    return true;
-                }
-            }
-
-            //kolumny
-            for (let j = 0; j < 3; j++)
+                showWin();
+            } 
+            else if (checkDraw())
             {
-                if (plansza[0][j] === gracz && plansza[1][j] === gracz && plansza[2][j] === gracz)
-                {
-                    return true;
-                }
+                showDraw();
             }
+            else
+            {
+                changePlayer();
+            }
+        }
 
-            //przekątne
-            if ((plansza[0][0] === gracz && plansza[1][1] === gracz && plansza[2][2] === gracz) ||
-            (plansza[0][2] === gracz && plansza[1][1] === gracz && plansza[2][0] === gracz))
+        function showWin()
+        {
+            alert('Gracz ' + (playerSign[currentPlayer]) + ' wygrał! Zresetuj plansze by grać dalej');
+            updateScore();
+            boardActivity = false;
+        }
+
+        function showDraw()
+        {
+            alert('Remis!');
+            boardActivity = false;
+        }
+
+        function checkMoveAvailability(row, column)
+        {
+            if (board[row][column] == '' && boardActivity == true)
             {
                 return true;
             }
-            return false;
         }
 
-        function sprawdzRemis()
+        function changePlayer()
+        {
+            currentPlayer = (currentPlayer + 1) % playerSign.length;
+        }
+
+        function checkWin(player)
+        {
+            if (checkRows(player))
+                return true;
+            if (checkColumns(player))
+                return true;
+            if (checkDiagonals(player))
+                return true;
+            else
+                return false;
+        }
+        
+        function checkDiagonals(player)
+        {
+            if ((board[0][0] === player && board[1][1] === player && board[2][2] === player) ||
+            (board[0][2] === player && board[1][1] === player && board[2][0] === player))
+            {
+                return true;
+            }
+        }
+
+        function checkColumns(player)
+        {
+            for (let j = 0; j < 3; j++)
+            {
+                if (board[0][j] === player && board[1][j] === player && board[2][j] === player)
+                {
+                    return true;
+                }
+            }
+        }
+
+        function checkRows(player)
+        {
+            for (let i = 0; i < 3; i++)
+            {
+                if (board[i][0] === player && board[i][1] === player && board[i][2] === player) 
+                {
+                    return true;
+                }
+            }
+        }
+
+        function checkDraw()
         {
             for (let i = 0; i < 3; i++)
             {
                 for (let j = 0; j < 3; j++)
                 {
-                    if (plansza[i][j] === '')
+                    if (board[i][j] === '')
                     {
                         return false;
                     }
@@ -147,54 +183,67 @@
             return true;
         }
 
-        //wypelnianie planszy
-        function zaktualizujWygladPlanszy()
+        function updateBoardStatus()//fill the board
         {
-            const komorki = document.getElementsByTagName('td');
-            let indeks = 0;
+            const cells = document.getElementsByTagName('td');
+            let index = 0;
             for (let i = 0; i < 3; i++)
             {
                 for (let j = 0; j < 3; j++)
                 {
-                    komorki[indeks].innerText = plansza[i][j];
-                    indeks++;
+                    cells[index].innerText = board[i][j];
+                    index++;
                 }
             }
         }
 
-        zaktualizujWygladPlanszy();
+        updateBoardStatus();
 
-        function zresetujPlansze()
+        function resetBoard()
         {
-            plansza =
+            board =
             [
                 ['', '', ''],
                 ['', '', ''],
                 ['', '', '']
             ]
-            aktywnoscPlanszy = true;
-            aktualnyGracz = 0;
-            zaktualizujWygladPlanszy();
+            boardActivity = true;
+            currentPlayer = 0;
+            updateBoardStatus();
         }
 
-        function zmienPierwszegoGracza(gracz)
+        function changePlayerSign(player)
         {
-            if (gracz == 0)
+            if (player == 0)
             {
-                aktualnyGracz = 0;
+                currentPlayer = 0;
             }
             else
             {
-                aktualnyGracz = 1;
+                currentPlayer = 1;
             }
         }
 
-        function zresetujWynik()
+        function updateScore()
         {
-            wynikO = 0;
-            wynikX = 0;
-            document.getElementById("calyWynikX").innerHTML = "X: " + wynikX;
-            document.getElementById("calyWynikO").innerHTML = "O: " + wynikO;
+            if (currentPlayer == 0)
+            {
+                scoreX += 1;
+                document.getElementById("xScoreMark").innerHTML = "X: " + scoreX;
+            }
+            else
+            {
+                scoreO += 1;
+                document.getElementById("oScoreMark").innerHTML = "O: " + scoreO;
+            }
+        }
+
+        function resetScore()
+        {
+            scoreO = 0;
+            scoreX = 0;
+            document.getElementById("xScoreMark").innerHTML = "X: " + scoreX;
+            document.getElementById("oScoreMark").innerHTML = "O: " + scoreO;
         }
     </script>
 </html>
