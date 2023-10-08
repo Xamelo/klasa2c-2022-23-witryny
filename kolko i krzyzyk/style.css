@@ -21,16 +21,16 @@ main {
     height: 700px;
 }
 
-.plansza {
+.board {
     display: flex;
     justify-content: center;
 }
 
-.plansza table {
+.board table {
     border-style: solid;
 }
 
-.plansza table td {
+.board table td {
     padding: 50px;
     cursor: pointer;
     border-style: none;
@@ -41,7 +41,7 @@ main {
     font-weight: bolder;
 }
 
-.plansza table td:hover {
+.board table td:hover {
     background-color: aquamarine;
 }
 
@@ -69,11 +69,11 @@ main {
     cursor: pointer;
 }
 
-.wynik {
+.score {
     text-align: center;
 }
 
-.wynik span {
+.score span {
     border: 1px solid;
     font-size: 30px;
 }
@@ -113,7 +113,7 @@ main {
     margin-bottom: 4px;
 }
 
-.wynik p {
+.score p {
     font-size: 30px;
     font-weight: bold;
 }
